@@ -7,7 +7,7 @@ import { connect } from "cloudflare:sockets";
 let userID = "58c95ee1-1320-439f-b41b-083d4962fa59";
 
 const proxyIPs = ["us.cfpyip.dpdns.org"];
-const cn_hostnames = ["example.com"];
+const cn_hostnames = [''];
 let CDNIP = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d\u002e\u0073\u0067'
 // http_ip
 let IP1 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d'
@@ -186,10 +186,10 @@ export default {
             // return new Response('Not found', { status: 404 });
             // For any other path, reverse proxy to 'ramdom website' and return the original response, caching it in the process
             if (cn_hostnames.includes('')) {
-            return new Response(JSON.stringify(request.cf, null, 4), {
+            return new Response(await nginx(), {
               status: 200,
               headers: {
-                "Content-Type": "application/json;charset=utf-8",
+                "Content-Type": "text/html;charset=utf-8",
               },
             });
             }
@@ -2463,3 +2463,33 @@ return `{
 		  }
 		}`;
 } 
+async function nginx() {
+    const text = `
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<title>Welcome to nginx!</title>
+	<style>
+		body {
+			width: 35em;
+			margin: 0 auto;
+			font-family: Tahoma, Verdana, Arial, sans-serif;
+		}
+	</style>
+	</head>
+	<body>
+	<h1>Welcome to nginx!</h1>
+	<p>If you see this page, the nginx web server is successfully installed and
+	working. Further configuration is required.</p>
+	
+	<p>For online documentation and support please refer to
+	<a href="http://nginx.org/">nginx.org</a>.<br/>
+	Commercial support is available at
+	<a href="http://nginx.com/">nginx.com</a>.</p>
+	
+	<p><em>Thank you for using nginx.</em></p>
+	</body>
+	</html>
+	`
+    return text;
+}
