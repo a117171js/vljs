@@ -46,9 +46,6 @@ let PT13 = '2096'
 let proxyIP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
 let proxyPort = proxyIP.match(/:(\d+)$/) ? proxyIP.match(/:(\d+)$/)[1] : '443';
 const dohURL = "https://cloudflare-dns.com/dns-query";
-if (!isValidUUID(userID)) {
-  throw new Error("uuid is not valid");
-}
 
 export default {
   /**
