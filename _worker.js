@@ -2,8 +2,6 @@
 // @ts-ignore
 import { connect } from "cloudflare:sockets";
 
-// How to generate your own UUID:
-// [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
 let \u{75}\u{73}\u{65}\u{72}\u{49}\u{44} = "";
 
 const \u{70}\u{72}\u{6f}\u{78}\u{79}IPs = [""];
